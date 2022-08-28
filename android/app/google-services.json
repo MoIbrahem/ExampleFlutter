@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1056692751650",
+    "project_id": "moibrahem-project",
+    "storage_bucket": "moibrahem-project.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1056692751650:android:818caa03d26d6ca9ab297b",
+        "android_client_info": {
+          "package_name": "com.example.example"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1056692751650-nv4b1r5h7ks8lgskaqpkuul5rbijqhj7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDgniDTRcb5OHMjG1LZHZvD9STmDdCBVHc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1056692751650-nv4b1r5h7ks8lgskaqpkuul5rbijqhj7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>1056692751650-rdo6uek2fpeu2u7dmrsh2vnpf4tnr54c.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.1056692751650-rdo6uek2fpeu2u7dmrsh2vnpf4tnr54c</string>
+	<key>API_KEY</key>
+	<string>AIzaSyC-Wm1tq6a8mcA7lWwtI1gtfD2z6pKal_c</string>
+	<key>GCM_SENDER_ID</key>
+	<string>1056692751650</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.example</string>
+	<key>PROJECT_ID</key>
+	<string>moibrahem-project</string>
+	<key>STORAGE_BUCKET</key>
+	<string>moibrahem-project.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:1056692751650:ios:10a20f38b28661fbab297b</string>
+</dict>
+</plist>
