@@ -1,7 +1,6 @@
+import 'package:example/auth/register.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:example/dio/apiProvider.dart';
-import 'package:example/auth/register.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -14,6 +13,7 @@ class _LoginScreenState extends State<LoginScreen> {
   TextEditingController passwordController = TextEditingController();
 
   var formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,13 +44,6 @@ class _LoginScreenState extends State<LoginScreen> {
                       return "email address must not be empty";
                     }
                   },
-
-                  // onFieldSubmitted: (value) {
-                  //   print(value);
-                  // },
-                  // onChanged: (value) {
-                  //   print(value);
-                  // },
                   decoration: InputDecoration(
                     labelText: "Email",
                     prefixIcon: Icon(Icons.email),
@@ -69,12 +62,6 @@ class _LoginScreenState extends State<LoginScreen> {
                       return "password is too short";
                     }
                   },
-                  // onFieldSubmitted: (value) {
-                  //   print(value);
-                  // },
-                  // onChanged: (value) {
-                  //   print(value);
-                  // },
                   obscureText: visible,
                   decoration: InputDecoration(
                     labelText: "Password",
@@ -101,14 +88,10 @@ class _LoginScreenState extends State<LoginScreen> {
                       if (formKey.currentState!.validate()) {
                         print(emailController.text);
                         print(passwordController.text);
-
-                        // ApiProvider().singInEmail(
-                        //     email: emailController.text,
-                        //     password: passwordController.text);
                         FirebaseAuth.instance
                             .signInWithEmailAndPassword(
-                            email: emailController.text,
-                            password: passwordController.text)
+                                email: emailController.text,
+                                password: passwordController.text)
                             .then((value) {
                           print(value.user!.email);
                           print(value.user!.uid);

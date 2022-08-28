@@ -1,8 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-
-import '../dio/apiProvider.dart';
 
 class RegisterScreen extends StatefulWidget {
   @override
@@ -102,14 +99,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       if (formKey.currentState!.validate()) {
                         print(emailController.text);
                         print(passwordController.text);
-
-                        // ApiProvider().singInEmail(
-                        //     email: emailController.text,
-                        //     password: passwordController.text);
                         FirebaseAuth.instance
                             .createUserWithEmailAndPassword(
-                            email: emailController.text,
-                            password: passwordController.text)
+                                email: emailController.text,
+                                password: passwordController.text)
                             .then((value) {
                           print(value.user!.email);
                           print(value.user!.uid);
@@ -131,7 +124,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 SizedBox(
                   height: 20,
                 ),
-
               ],
             ),
           ),
