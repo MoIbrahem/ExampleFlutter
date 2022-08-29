@@ -17,7 +17,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
+      body: Padding(
+        padding: const EdgeInsets.all(15.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -26,16 +27,56 @@ class _ProfileScreenState extends State<ProfileScreen> {
               builder: (context, snapshot) {
                 if (snapshot.connectionState != ConnectionState.done)
                   return Text("Loading data...Please wait");
-                return Column(
-                  children: [
-                    Text("Name  : ${data['first name']} ${data['last name']}"),
-                    Text(
-                        "Birth date  : ${DateFormat('yyyy-MM-dd').format(data['birth date'].toDate())}"),
-                  ],
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                            width: double.infinity,
+                            height: 70,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: Colors.black12,
+                            ),
+                            child: Padding(
+                              padding: EdgeInsets.only(top: 17, left: 10),
+                              child: Text(
+                                  style: TextStyle(
+                                      fontSize: 30,
+                                      fontWeight: FontWeight.bold),
+                                  "Name: ${data['first name']} ${data['last name']}"),
+                            )),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                          width: double.infinity,
+                          height: 70,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.black12,
+                          ),
+                          child: Padding(
+                            padding: EdgeInsets.only(top: 17, left: 10),
+                            child: Text(
+                                style: TextStyle(
+                                  fontSize: 30,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                                "Birth date: ${DateFormat('yyyy-MM-dd').format(data['birth date'].toDate())}"),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 );
               },
             ),
-            Text('signed in as: ' + user.email!),
+            Text(
+                style: TextStyle(fontSize: 20), 'signed in as: ' + user.email!),
             MaterialButton(
               onPressed: () {
                 FirebaseAuth.instance.signOut();
