@@ -16,13 +16,3 @@ class UserManagement {
     });
   }
 }
-
-Future addUserDetails(String firstName, String lastName, String email,
-    DateTime birthDate, String uid) async {
-  await FirebaseFirestore.instance.collection('users').doc(uid).set({
-    'first name': firstName,
-    'last name ': lastName,
-    'email': email,
-    'birth date': birthDate
-  });
-}

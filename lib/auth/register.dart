@@ -64,7 +64,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       DateTime birthDate) async {
     await FirebaseFirestore.instance.collection('users').add({
       'first name': firstName,
-      'last name ': lastName,
+      'last name': lastName,
       'email': email,
       'birth date': birthDate
     });
