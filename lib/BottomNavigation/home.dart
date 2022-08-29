@@ -1,9 +1,9 @@
-import 'package:example/BottomNavigation/ArchivedScreen.dart';
 import 'package:example/BottomNavigation/DoneScreen.dart';
+import 'package:example/BottomNavigation/Profile.dart';
 import 'package:example/BottomNavigation/TaskScreen.dart';
-import 'package:flutter/material.dart';
 import 'package:example/dio/apiProvider.dart';
 import 'package:example/model/storyModel.dart';
+import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Home extends StatefulWidget {
@@ -45,8 +45,7 @@ class _HomeState extends State<Home> {
   List<Widget> screens = [
     TaskScreen(),
     DoneScreen(),
-    ArchivedScreen()
-  ];
+    ProfileScreen()];
 
   @override
   void initState() {

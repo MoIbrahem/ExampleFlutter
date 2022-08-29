@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:example/model/userModel.dart';
-import 'package:example/userScreen.dart';
 import 'package:flutter/material.dart';
 
 class CreateUser extends StatelessWidget {
@@ -18,13 +17,12 @@ class CreateUser extends StatelessWidget {
                 final String name = controller.text;
                 final docUser = FirebaseFirestore.instance
                     .collection("users")
-                    .doc('Minato');
+                    .doc("Minato");
 
                 final user = UsersModel(
                   id: docUser.id,
                   name: name,
                   age: "25",
-
                 );
 
                 final json = user.toJson();

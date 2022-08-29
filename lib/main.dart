@@ -1,14 +1,8 @@
-import 'package:example/BottomNavigation/home.dart';
-import 'package:example/homeScreen.dart';
-import 'package:example/messengerScreen.dart';
-import 'package:example/store/createUser.dart';
-import 'package:example/store/readUser.dart';
-import 'package:example/userScreen.dart';
+import 'package:example/main_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+
 import 'firebase_options.dart';
-import 'package:example/auth/LoginScreen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,7 +22,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'flutter demo',
       theme: new ThemeData(primarySwatch: Colors.blue),
-      home: CreateUser(),
+      home: MainPage(),
     );
   }
 }
