@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:example/auth/LoginScreen.dart';
+import 'package:example/main_page.dart';
+import 'package:example/services/user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -41,18 +43,20 @@ class _RegisterScreenState extends State<RegisterScreen> {
           .createUserWithEmailAndPassword(
               email: emailController.text.trim(),
               password: passwordController.text.trim())
-          .then((value) {
-        print(value.user!.email);
-        print(value.user!.uid);
-        print("Register success");
-      }).catchError((error) {
-        print(error.toString());
-      });
-      addUserDetails(
-          firstNameController.text.trim(),
-          lastNameController.text.trim(),
-          emailController.text.trim(),
-          DateTime.parse(birthDateController.text.trim()));
+          .then((signedInUser) {
+            UserManagement().storeNewUser(
+                firstNameController.text.trim(),
+                lastNameController.text.trim(),
+                emailController.text.trim(),
+                DateTime.parse(birthDateController.text.trim()),
+                signedInUser.user,
+                context);
+          })
+          .then((value) => Navigator.push(
+              context, MaterialPageRoute(builder: (context) => MainPage())))
+          .catchError((e) {
+            print(e);
+          });
     }
   }
 

@@ -1,4 +1,5 @@
 import 'package:example/auth/register.dart';
+import 'package:example/main_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -105,12 +106,12 @@ class _LoginScreenState extends State<LoginScreen> {
                                 .signInWithEmailAndPassword(
                                     email: emailController.text,
                                     password: passwordController.text)
-                                .then((value) {
-                              print(value.user!.email);
-                              print(value.user!.uid);
-                              print("Login success");
-                            }).catchError((error) {
-                              print(error.toString());
+                                .then((value) => Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => MainPage())))
+                                .catchError((e) {
+                              print(e);
                             });
                           }
                         },
