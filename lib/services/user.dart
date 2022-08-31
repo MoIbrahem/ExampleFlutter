@@ -10,7 +10,7 @@ class UserManagement {
         .doc(firebaseUser.uid)
         .set({
       'first name': firstName,
-      'last name ': lastName,
+      'last name': lastName,
       'email': email,
       'birth date': birthDate
     });
