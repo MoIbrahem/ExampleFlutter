@@ -70,8 +70,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         width: 120,
                       )
                     ],
-                    desc: ""
-                        "${e}")
+                    desc: e.runtimeType == FirebaseAuthException
+                        ? "This email is already in use"
+                        : "${e}")
                 .show();
             print(e);
           });
