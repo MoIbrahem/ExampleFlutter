@@ -2,6 +2,7 @@ import 'package:example/auth/register.dart';
 import 'package:example/main_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -111,6 +112,25 @@ class _LoginScreenState extends State<LoginScreen> {
                                     MaterialPageRoute(
                                         builder: (context) => MainPage())))
                                 .catchError((e) {
+                              Alert(
+                                      context: context,
+                                      type: AlertType.error,
+                                      title: "Failed Login",
+                                      buttons: [
+                                        DialogButton(
+                                          child: Text(
+                                            "Ok",
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 20),
+                                          ),
+                                          onPressed: () =>
+                                              Navigator.pop(context),
+                                          width: 120,
+                                        )
+                                      ],
+                                      desc: "Incorrect Email Or Password.")
+                                  .show();
                               print(e);
                             });
                           }

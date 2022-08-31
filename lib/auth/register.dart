@@ -5,6 +5,7 @@ import 'package:example/services/user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 class RegisterScreen extends StatefulWidget {
   @override
@@ -55,6 +56,23 @@ class _RegisterScreenState extends State<RegisterScreen> {
           .then((value) => Navigator.push(
               context, MaterialPageRoute(builder: (context) => MainPage())))
           .catchError((e) {
+            Alert(
+                    context: context,
+                    type: AlertType.error,
+                    title: "Failed Register",
+                    buttons: [
+                      DialogButton(
+                        child: Text(
+                          "Ok",
+                          style: TextStyle(color: Colors.white, fontSize: 20),
+                        ),
+                        onPressed: () => Navigator.pop(context),
+                        width: 120,
+                      )
+                    ],
+                    desc: ""
+                        "${e}")
+                .show();
             print(e);
           });
     }
