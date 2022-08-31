@@ -3,6 +3,7 @@ import 'package:example/auth/LoginScreen.dart';
 import 'package:example/main_page.dart';
 import 'package:example/services/user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
@@ -62,19 +63,21 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     title: "Failed Register",
                     buttons: [
                       DialogButton(
+                        onPressed: () => Navigator.pop(context),
+                        width: 120,
                         child: Text(
                           "Ok",
                           style: TextStyle(color: Colors.white, fontSize: 20),
                         ),
-                        onPressed: () => Navigator.pop(context),
-                        width: 120,
                       )
                     ],
                     desc: e.runtimeType == FirebaseAuthException
                         ? "This email is already in use"
                         : "${e}")
                 .show();
-            print(e);
+            if (kDebugMode) {
+              print(e);
+            }
           });
     }
   }

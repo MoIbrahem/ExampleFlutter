@@ -1,3 +1,4 @@
+import 'package:example/BottomNavigation/AboutScreen.dart';
 import 'package:example/BottomNavigation/DoneScreen.dart';
 import 'package:example/BottomNavigation/Profile.dart';
 import 'package:example/BottomNavigation/TaskScreen.dart';
@@ -18,7 +19,12 @@ class _NavigationState extends State<Navigation> {
   SuccessStories? successStories;
   bool isLoading = true;
 
-  List<Widget> screens = [TaskScreen(), DoneScreen(), ProfileScreen()];
+  List<Widget> screens = [
+    TaskScreen(),
+    ProfileScreen(),
+    DoneScreen(),
+    AboutScreen()
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -26,15 +32,19 @@ class _NavigationState extends State<Navigation> {
       appBar: AppBar(
         title: Text("Task App"),
         actions: [
-          IconButton(onPressed: () async {
-            final prefs = await SharedPreferences.getInstance();
-            prefs.setBool('showHome', false);
-            
-            Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => OnBording()));
-          }, icon: const Icon(Icons.logout))
+          IconButton(
+              onPressed: () async {
+                final prefs = await SharedPreferences.getInstance();
+                prefs.setBool('showHome', false);
+
+                Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(builder: (context) => OnBording()));
+              },
+              icon: const Icon(Icons.logout))
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
         currentIndex: currentIndex,
         onTap: (index) {
           print(index);
@@ -42,13 +52,14 @@ class _NavigationState extends State<Navigation> {
           setState(() {});
         },
         items: [
-          BottomNavigationBarItem(icon: Icon(Icons.menu), label: "Tasks"),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.check),
-            label: "Done",
-          ),
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
           BottomNavigationBarItem(
               icon: Icon(Icons.person_rounded), label: "Profile"),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.category),
+            label: "Fields",
+          ),
+          BottomNavigationBarItem(icon: Icon(Icons.info), label: "About")
         ],
       ),
       body: screens[currentIndex],
