@@ -1,11 +1,14 @@
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:example/BottomNavigation/Navigation.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:path/path.dart' as Path;
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 class AddContentScreen extends StatefulWidget {
   const AddContentScreen({Key? key}) : super(key: key);
@@ -116,8 +119,76 @@ class _AddContentScreenState extends State<AddContentScreen> {
                   ElevatedButton(
                     child: Text('upload'),
                     onPressed: () async {
-                      await postMake(
-                          titleController.text, discreptionController.text);
+                      if (a.isNotEmpty) {
+                        await postMake(titleController.text,
+                                discreptionController.text)
+                            .then((value) => Alert(
+                                    context: context,
+                                    type: AlertType.success,
+                                    title: "Posted Sucessfully",
+                                    buttons: [
+                                      DialogButton(
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      Navigation()));
+                                        },
+                                        width: 120,
+                                        child: Text(
+                                          "Cool",
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 20),
+                                        ),
+                                      )
+                                    ],
+                                    desc:
+                                        "Your Post is now available to all users.")
+                                .show())
+                            .catchError((e) {
+                          Alert(
+                                  context: context,
+                                  type: AlertType.error,
+                                  title: "Failed post",
+                                  buttons: [
+                                    DialogButton(
+                                      onPressed: () => Navigator.pop(context),
+                                      width: 120,
+                                      child: Text(
+                                        "Ok",
+                                        style: TextStyle(
+                                            color: Colors.white, fontSize: 20),
+                                      ),
+                                    )
+                                  ],
+                                  desc: "${e}")
+                              .show();
+                          if (kDebugMode) {
+                            print(e);
+                          }
+                        });
+                      } else {
+                        Alert(
+                                context: context,
+                                type: AlertType.warning,
+                                title: "No images",
+                                buttons: [
+                                  DialogButton(
+                                    onPressed: () => Navigator.pop(context),
+                                    width: 120,
+                                    child: Text(
+                                      "Ok",
+                                      style: TextStyle(
+                                          color: Colors.white, fontSize: 20),
+                                    ),
+                                  )
+                                ],
+                                desc: "you must pick images to post")
+                            .show();
+                      }
                     },
                   ),
                 ],
