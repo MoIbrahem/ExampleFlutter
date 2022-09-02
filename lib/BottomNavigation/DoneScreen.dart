@@ -5,12 +5,30 @@ class DoneScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: Text(
-        'Done Screen',
-        style: TextStyle(
-          fontSize: 25,
-          fontWeight: FontWeight.bold,
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Fields"),
+        automaticallyImplyLeading: false,
+        centerTitle: true,
+        // actions: [
+        //   IconButton(
+        //       onPressed: () async {
+        //         final prefs = await SharedPreferences.getInstance();
+        //         prefs.setBool('showHome', false);
+        //
+        //         Navigator.of(context).pushReplacement(
+        //             MaterialPageRoute(builder: (context) => OnBording()));
+        //       },
+        //       icon: const Icon(Icons.logout))
+        // ],
+      ),
+      body: Center(
+        child: Text(
+          'Done Screen',
+          style: TextStyle(
+            fontSize: 25,
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ),
     );

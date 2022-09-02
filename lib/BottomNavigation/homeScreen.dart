@@ -7,6 +7,22 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Task App"),
+        automaticallyImplyLeading: false,
+        centerTitle: true,
+        // actions: [
+        //   IconButton(
+        //       onPressed: () async {
+        //         final prefs = await SharedPreferences.getInstance();
+        //         prefs.setBool('showHome', false);
+        //
+        //         Navigator.of(context).pushReplacement(
+        //             MaterialPageRoute(builder: (context) => OnBording()));
+        //       },
+        //       icon: const Icon(Icons.logout))
+        // ],
+      ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.blue,
         child: Icon(Icons.add),

@@ -17,6 +17,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("My Profile"),
+        automaticallyImplyLeading: false,
+        centerTitle: true,
+        // actions: [
+        //   IconButton(
+        //       onPressed: () async {
+        //         final prefs = await SharedPreferences.getInstance();
+        //         prefs.setBool('showHome', false);
+        //
+        //         Navigator.of(context).pushReplacement(
+        //             MaterialPageRoute(builder: (context) => OnBording()));
+        //       },
+        //       icon: const Icon(Icons.logout))
+        // ],
+      ),
       body: Padding(
         padding: const EdgeInsets.all(15.0),
         child: Column(

@@ -54,7 +54,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 signedInUser.user,
                 context);
           })
-          .then((value) => Navigator.push(
+          .then((value) => Navigator.pushReplacement(
               context, MaterialPageRoute(builder: (context) => MainPage())))
           .catchError((e) {
             Alert(
