@@ -1,7 +1,7 @@
 import 'package:example/BottomNavigation/AboutScreen.dart';
 import 'package:example/BottomNavigation/DoneScreen.dart';
 import 'package:example/BottomNavigation/Profile.dart';
-import 'package:example/BottomNavigation/TaskScreen.dart';
+import 'package:example/BottomNavigation/homeScreen.dart';
 import 'package:example/model/storyModel.dart';
 import 'package:example/onboarding/onboarding.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +20,7 @@ class _NavigationState extends State<Navigation> {
   bool isLoading = true;
 
   List<Widget> screens = [
-    TaskScreen(),
+    HomeScreen(),
     ProfileScreen(),
     DoneScreen(),
     AboutScreen()

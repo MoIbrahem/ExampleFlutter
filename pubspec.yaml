@@ -46,6 +46,11 @@ dependencies:
   flutter_spinkit: "^4.0.0"
   smooth_page_indicator: ^1.0.0+2
   rflutter_alert: ^2.0.4
+  file_picker: ^5.0.1
+  permission_handler: ^10.0.0
+  firebase_storage: ^10.3.7
+  image_picker: ^0.8.5+3
+  uuid: 3.0.6
 
 
 dev_dependencies:
