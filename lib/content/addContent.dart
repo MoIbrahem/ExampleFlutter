@@ -20,14 +20,14 @@ class AddContentScreen extends StatefulWidget {
 
 class _AddContentScreenState extends State<AddContentScreen> {
   TextEditingController titleController = TextEditingController();
-  TextEditingController discreptionController = TextEditingController();
+  TextEditingController descriptionController = TextEditingController();
   List a = [];
   List imagesNames = [];
 
   @override
   void dispose() {
     titleController.dispose();
-    discreptionController.dispose();
+    descriptionController.dispose();
     super.dispose();
   }
 
@@ -50,7 +50,7 @@ class _AddContentScreenState extends State<AddContentScreen> {
         .doc()
         .set({
       'title': title,
-      'discreption': discreption,
+      'description': discreption,
       'email': firebaseUser.email,
       'images': Urls,
       'created': DateTime.now()
@@ -74,7 +74,7 @@ class _AddContentScreenState extends State<AddContentScreen> {
         icon: const Icon(Icons.send),
         onPressed: () async {
           if (a.isNotEmpty) {
-            await postMake(titleController.text, discreptionController.text)
+            await postMake(titleController.text, descriptionController.text)
                 .then((value) => Alert(
                         context: context,
                         type: AlertType.success,
@@ -167,9 +167,9 @@ class _AddContentScreenState extends State<AddContentScreen> {
                     keyboardType: TextInputType.multiline,
                     minLines: 1,
                     maxLines: 10,
-                    controller: discreptionController,
+                    controller: descriptionController,
                     decoration: InputDecoration(
-                      labelText: "discreption",
+                      labelText: "description",
                       prefixIcon: Icon(Icons.text_snippet_outlined),
                       border: OutlineInputBorder(),
                     ),
