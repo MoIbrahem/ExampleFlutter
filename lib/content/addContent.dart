@@ -43,11 +43,17 @@ class _AddContentScreenState extends State<AddContentScreen> {
 
     var firebaseUser = await FirebaseAuth.instance.currentUser!;
     List Urls = await uploadFiles(imagesNames);
-    await FirebaseFirestore.instance.collection('posts').doc().set({
+    await FirebaseFirestore.instance
+        .collection('users')
+        .doc(firebaseUser.uid)
+        .collection('posts')
+        .doc()
+        .set({
       'title': title,
       'discreption': discreption,
       'email': firebaseUser.email,
-      'images': Urls
+      'images': Urls,
+      'created': DateTime.now()
     });
 
     Navigator.of(context).pop();
