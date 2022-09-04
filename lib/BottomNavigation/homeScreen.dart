@@ -1,3 +1,5 @@
+import 'dart:ui' as ui;
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:example/content/addContent.dart';
 import 'package:example/model/postModel.dart';
@@ -22,7 +24,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   fetchRecords() async {
     var records =
-        await FirebaseFirestore.instance.collectionGroup("posts").get();
+    await FirebaseFirestore.instance.collectionGroup("posts").get();
     print(records);
     mapRecords(records);
   }
@@ -30,17 +32,18 @@ class _HomeScreenState extends State<HomeScreen> {
   mapRecords(QuerySnapshot<Map<String, dynamic>> records) {
     var _list = records.docs
         .map((post) => PostModel(
-            id: post.id,
-            title: post['title'],
-            email: post['email'],
-            images: post['images'],
-            description: post['description'],
-            created: post['created'].toDate()))
+        id: post.id,
+        title: post['title'],
+        email: post['email'],
+        images: post['images'],
+        description: post['description'],
+        created: post['created'].toDate()))
         .toList();
 
     print(_list);
 
     setState(() {
+      _list.sort((b, a) => a.created!.compareTo(b.created!));
       postsList = _list;
     });
   }
@@ -48,11 +51,6 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text("Task App"),
-          automaticallyImplyLeading: false,
-          centerTitle: true,
-        ),
         floatingActionButton: FloatingActionButton(
           backgroundColor: Colors.blue,
           child: Icon(Icons.add),
@@ -77,15 +75,34 @@ class _HomeScreenState extends State<HomeScreen> {
 Widget buildPosts(PostModel x) {
   return Card(
     child: Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Row(
-          children: [Image.network(x.images![0])],
+        Image.network(
+          x.images![0],
+          height: 120,
+          width: double.infinity,
+          fit: BoxFit.cover,
         ),
-        Row(
-          children: [
-            Text(x.title),
-            Text(DateFormat('yyyy-MM-dd').format(x.created!))
-          ],
+        ListTile(
+          title: Text(x.title),
+          subtitle: Text(
+            x.description!,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+            textAlign: TextAlign.justify,
+            style: TextStyle(color: Colors.black.withOpacity(0.6)),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(right: 8),
+          child: Container(
+              width: double.infinity,
+              child: Text(
+                DateFormat('yyyy-MM-dd hh:mm').format(x.created!),
+                style: TextStyle(
+                    color: Colors.black.withOpacity(0.5), fontSize: 12),
+                textDirection: ui.TextDirection.rtl,
+              )),
         )
       ],
     ),
