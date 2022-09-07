@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:example/content/yourPosts.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -86,6 +87,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           ),
                         ),
                       ),
+
                     ],
                   ),
                 );
@@ -99,7 +101,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
               },
               color: Colors.grey,
               child: Text('sign out'),
-            )
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            MaterialButton(onPressed: (){
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => YourPosts(),
+                ),
+              );
+            },child: Text("My Posts"), color: Colors.grey,)
+
           ],
         ),
       ),
