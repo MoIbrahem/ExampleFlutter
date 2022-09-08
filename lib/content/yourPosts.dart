@@ -27,8 +27,8 @@ class _YourPostsState extends State<YourPosts> {
         centerTitle: true,
       ),
       body: ListView.separated(
-          itemBuilder: (context, index) =>
-              PostsManagement().buildPosts(this, postsList, postsList[index]),
+          itemBuilder: (context, index) => PostsManagement()
+              .buildPosts(this, postsList, postsList[index], context),
           separatorBuilder: (context, index) => Divider(),
           itemCount: postsList.length),
     );

@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:example/content/addContent.dart';
 import 'package:example/services/posts.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -22,7 +23,9 @@ class _HomeScreenState extends State<HomeScreen> {
   fetchRecords() async {
     var records =
         await FirebaseFirestore.instance.collectionGroup("posts").get();
-    print(records);
+    if (kDebugMode) {
+      print(records);
+    }
     postsList = PostsManagement().mapRecords(this, postsList, records);
   }
 
@@ -46,7 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
         body: SafeArea(
           child: ListView.separated(
               itemBuilder: (context, index) => PostsManagement()
-                  .buildPosts(this, postsList, postsList[index]),
+                  .buildPosts(this, postsList, postsList[index], context),
               separatorBuilder: (context, index) => Divider(),
               itemCount: postsList.length),
         ));

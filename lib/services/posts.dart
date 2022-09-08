@@ -5,11 +5,12 @@ import 'package:example/model/postModel.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 class PostsManagement {
   final user = FirebaseAuth.instance.currentUser!;
 
-  Widget buildPosts(State state, List postsList, PostModel x) {
+  Widget buildPosts(State state, List postsList, PostModel x, context) {
     return GestureDetector(
       onTap: () {
         print("1");
@@ -42,14 +43,59 @@ class PostsManagement {
                       IconButton(onPressed: () {}, icon: Icon(Icons.edit)),
                       IconButton(
                           onPressed: () {
-                            FirebaseFirestore.instance
-                                .collection('users')
-                                .doc(user.uid)
-                                .collection('posts')
-                                .doc(x.id)
-                                .delete();
-                            postsList.remove(x);
-                            state.setState(() {});
+                            Alert(
+                                    context: context,
+                                    type: AlertType.warning,
+                                    title: "Confirm Delete",
+                                    buttons: [
+                                      DialogButton(
+                                        onPressed: () async {
+                                          showDialog(
+                                            context: context,
+                                            builder: (context) {
+                                              return Center(
+                                                child:
+                                                    CircularProgressIndicator(),
+                                              );
+                                            },
+                                          );
+
+                                          await FirebaseFirestore.instance
+                                              .collection('users')
+                                              .doc(user.uid)
+                                              .collection('posts')
+                                              .doc(x.id)
+                                              .delete();
+                                          await postsList.remove(x);
+                                          state.setState(() {});
+
+                                          Navigator.pop(context);
+                                          Navigator.of(context).pop();
+                                        },
+                                        color: Colors.green,
+                                        width: 120,
+                                        child: Text(
+                                          "Yes",
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 20),
+                                        ),
+                                      ),
+                                      DialogButton(
+                                        onPressed: () => Navigator.pop(context),
+                                        width: 120,
+                                        color: Colors.red,
+                                        child: Text(
+                                          "No",
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 20),
+                                        ),
+                                      )
+                                    ],
+                                    desc:
+                                        "Are you sure you want to delete this post?")
+                                .show();
                           },
                           icon: Icon(Icons.delete)),
                     ],
