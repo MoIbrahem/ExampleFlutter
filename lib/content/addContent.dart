@@ -140,135 +140,139 @@ class _AddContentScreenState extends State<AddContentScreen> {
         },
       ),
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Center(
-            child: Form(
-              key: formKey,
-              child: Column(
-                children: [
-                  TextFormField(
-                    controller: titleController,
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return "Title must not be empty";
-                      }
-                    },
-                    decoration: InputDecoration(
-                      labelText: "Tiltle",
-                      prefixIcon: Icon(Icons.title),
-                      border: OutlineInputBorder(),
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Center(
+              child: Form(
+                key: formKey,
+                child: Column(
+                  children: [
+                    TextFormField(
+                      controller: titleController,
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return "Title must not be empty";
+                        }
+                      },
+                      decoration: InputDecoration(
+                        labelText: "Tiltle",
+                        prefixIcon: Icon(Icons.title),
+                        border: OutlineInputBorder(),
+                      ),
                     ),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  TextFormField(
-                    keyboardType: TextInputType.multiline,
-                    minLines: 1,
-                    maxLines: 10,
-                    controller: descriptionController,
-                    decoration: InputDecoration(
-                      labelText: "description",
-                      prefixIcon: Icon(Icons.text_snippet_outlined),
-                      border: OutlineInputBorder(),
+                    SizedBox(
+                      height: 20,
                     ),
-                  ),
-                  a.length != 0
-                      ? Container(
-                          margin: EdgeInsets.all(10),
-                          width: double.infinity,
-                          child: ElevatedButton(
-                            child: Text('pick files'),
-                            onPressed: () async {
-                              FilePickerResult? result =
-                                  await FilePicker.platform.pickFiles(
-                                allowMultiple: true,
-                                type: FileType.custom,
-                                allowedExtensions: ['jpg', 'jpeg', 'png'],
-                              );
+                    TextFormField(
+                      keyboardType: TextInputType.multiline,
+                      minLines: 1,
+                      maxLines: 10,
+                      controller: descriptionController,
+                      decoration: InputDecoration(
+                        labelText: "description",
+                        prefixIcon: Icon(Icons.text_snippet_outlined),
+                        border: OutlineInputBorder(),
+                      ),
+                    ),
+                    a.length != 0
+                        ? Container(
+                            margin: EdgeInsets.all(10),
+                            width: double.infinity,
+                            child: ElevatedButton(
+                              child: Text('pick files'),
+                              onPressed: () async {
+                                FilePickerResult? result =
+                                    await FilePicker.platform.pickFiles(
+                                  allowMultiple: true,
+                                  type: FileType.custom,
+                                  allowedExtensions: ['jpg', 'jpeg', 'png'],
+                                );
 
-                              if (result != null) {
-                                List<File> filess = result.paths
-                                    .map((path) => File(path!))
-                                    .toList();
-                                for (PlatformFile pfile in result.files) {
-                                  imagesNames.add(File(pfile.path!));
+                                if (result != null) {
+                                  List<File> filess = result.paths
+                                      .map((path) => File(path!))
+                                      .toList();
+                                  for (PlatformFile pfile in result.files) {
+                                    imagesNames.add(File(pfile.path!));
+                                  }
+
+                                  setState(() {
+                                    a = filess;
+                                  });
+                                  print(imagesNames);
+                                } else {
+                                  // User canceled the picker
                                 }
+                              },
+                            ),
+                          )
+                        : Container(),
+                    a.length != 0
+                        ? Expanded(
+                            child: ListView.separated(
+                                itemBuilder: (context, index) =>
+                                    buildImages(a[index]),
+                                separatorBuilder: (context, index) => Divider(),
+                                itemCount: a.length),
+                          )
+                        : Container(
+                            padding: EdgeInsets.all(10),
+                            width: double.infinity,
+                            child: DottedBorder(
+                              borderType: BorderType.RRect,
+                              radius: Radius.circular(20),
+                              dashPattern: [10, 10],
+                              color: Colors.grey,
+                              strokeWidth: 2,
+                              child: Center(
+                                child: Column(
+                                  children: [
+                                    IconButton(
+                                        onPressed: () async {
+                                          FilePickerResult? result =
+                                              await FilePicker.platform
+                                                  .pickFiles(
+                                            allowMultiple: true,
+                                            type: FileType.custom,
+                                            allowedExtensions: [
+                                              'jpg',
+                                              'jpeg',
+                                              'png'
+                                            ],
+                                          );
 
-                                setState(() {
-                                  a = filess;
-                                });
-                                print(imagesNames);
-                              } else {
-                                // User canceled the picker
-                              }
-                            },
-                          ),
-                        )
-                      : Container(),
-                  a.length != 0
-                      ? Expanded(
-                          child: ListView.separated(
-                              itemBuilder: (context, index) =>
-                                  buildImages(a[index]),
-                              separatorBuilder: (context, index) => Divider(),
-                              itemCount: a.length),
-                        )
-                      : Container(
-                          padding: EdgeInsets.all(10),
-                          width: double.infinity,
-                          child: DottedBorder(
-                            borderType: BorderType.RRect,
-                            radius: Radius.circular(20),
-                            dashPattern: [10, 10],
-                            color: Colors.grey,
-                            strokeWidth: 2,
-                            child: Center(
-                              child: Column(
-                                children: [
-                                  IconButton(
-                                      onPressed: () async {
-                                        FilePickerResult? result =
-                                            await FilePicker.platform.pickFiles(
-                                          allowMultiple: true,
-                                          type: FileType.custom,
-                                          allowedExtensions: [
-                                            'jpg',
-                                            'jpeg',
-                                            'png'
-                                          ],
-                                        );
+                                          if (result != null) {
+                                            List<File> filess = result.paths
+                                                .map((path) => File(path!))
+                                                .toList();
+                                            for (PlatformFile pfile
+                                                in result.files) {
+                                              imagesNames
+                                                  .add(File(pfile.path!));
+                                            }
 
-                                        if (result != null) {
-                                          List<File> filess = result.paths
-                                              .map((path) => File(path!))
-                                              .toList();
-                                          for (PlatformFile pfile
-                                              in result.files) {
-                                            imagesNames.add(File(pfile.path!));
+                                            setState(() {
+                                              a = filess;
+                                            });
+                                            print(imagesNames);
+                                          } else {
+                                            // User canceled the picker
                                           }
-
-                                          setState(() {
-                                            a = filess;
-                                          });
-                                          print(imagesNames);
-                                        } else {
-                                          // User canceled the picker
-                                        }
-                                      },
-                                      icon: Icon(Icons.add_a_photo_outlined),
-                                      iconSize: 100),
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Text("pick your images from here"),
-                                  )
-                                ],
+                                        },
+                                        icon: Icon(Icons.add_a_photo_outlined),
+                                        iconSize: 100),
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text("pick your images from here"),
+                                    )
+                                  ],
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),
