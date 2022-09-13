@@ -6,23 +6,14 @@ class DetailsOfPost extends StatefulWidget {
   final PostModel postModel;
   const DetailsOfPost({Key? key, required this.postModel}) : super(key: key);
 
-  // DetailsOfPost(PostModel postModel){
-  //
-  //   print(postModel.description);
-  // }
+
 
   @override
   State<DetailsOfPost> createState() => _DetailsOfPostState();
 }
 
 class _DetailsOfPostState extends State<DetailsOfPost> {
-  List<Widget> imagesList = [
-    Image(
-        image: NetworkImage('https://www.freepik.com/free-photos-vectors/sea')),
-    Image(image: NetworkImage('https://unsplash.com/s/photos/sea')),
-  ];
 
-  // List <Widget> imgList = widget.postModel.images;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
