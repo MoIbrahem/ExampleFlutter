@@ -35,11 +35,13 @@ class _DetailsOfPostState extends State<DetailsOfPost> {
             options: CarouselOptions( enableInfiniteScroll: false,),
           ),
           ListTile(
-            title: Text(widget.postModel.title),
-            subtitle: Text(
-              widget.postModel.description!,
-              textAlign: TextAlign.justify,
-              style: TextStyle(color: Colors.black.withOpacity(0.6)),
+            title: Center(child: Text(widget.postModel.title)),
+            subtitle: Center(
+              child: Text(
+                widget.postModel.description!,
+                textAlign: TextAlign.justify,
+                style: TextStyle(color: Colors.black.withOpacity(0.6)),
+              ),
             ),
           ),
         ],

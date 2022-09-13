@@ -140,12 +140,12 @@ class _AddContentScreenState extends State<AddContentScreen> {
         },
       ),
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Center(
-              child: Form(
-                key: formKey,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Center(
+            child: Form(
+              key: formKey,
+              child: Expanded(
                 child: Column(
                   children: [
                     TextFormField(
@@ -216,58 +216,71 @@ class _AddContentScreenState extends State<AddContentScreen> {
                                 separatorBuilder: (context, index) => Divider(),
                                 itemCount: a.length),
                           )
-                        : Container(
-                            padding: EdgeInsets.all(10),
-                            width: double.infinity,
-                            child: DottedBorder(
-                              borderType: BorderType.RRect,
-                              radius: Radius.circular(20),
-                              dashPattern: [10, 10],
-                              color: Colors.grey,
-                              strokeWidth: 2,
-                              child: Center(
-                                child: Column(
-                                  children: [
-                                    IconButton(
-                                        onPressed: () async {
-                                          FilePickerResult? result =
-                                              await FilePicker.platform
-                                                  .pickFiles(
-                                            allowMultiple: true,
-                                            type: FileType.custom,
-                                            allowedExtensions: [
-                                              'jpg',
-                                              'jpeg',
-                                              'png'
-                                            ],
-                                          );
+                        : Expanded(
+                            child: SingleChildScrollView(
+                              child: Column(
+                                children: [
+                                  Container(
+                                    padding: EdgeInsets.all(10),
+                                    width: double.infinity,
+                                    child: DottedBorder(
+                                      borderType: BorderType.RRect,
+                                      radius: Radius.circular(20),
+                                      dashPattern: [10, 10],
+                                      color: Colors.grey,
+                                      strokeWidth: 2,
+                                      child: Center(
+                                        child: Column(
+                                          children: [
+                                            IconButton(
+                                                onPressed: () async {
+                                                  FilePickerResult? result =
+                                                      await FilePicker.platform
+                                                          .pickFiles(
+                                                    allowMultiple: true,
+                                                    type: FileType.custom,
+                                                    allowedExtensions: [
+                                                      'jpg',
+                                                      'jpeg',
+                                                      'png'
+                                                    ],
+                                                  );
 
-                                          if (result != null) {
-                                            List<File> filess = result.paths
-                                                .map((path) => File(path!))
-                                                .toList();
-                                            for (PlatformFile pfile
-                                                in result.files) {
-                                              imagesNames
-                                                  .add(File(pfile.path!));
-                                            }
+                                                  if (result != null) {
+                                                    List<File> filess = result
+                                                        .paths
+                                                        .map((path) =>
+                                                            File(path!))
+                                                        .toList();
+                                                    for (PlatformFile pfile
+                                                        in result.files) {
+                                                      imagesNames.add(
+                                                          File(pfile.path!));
+                                                    }
 
-                                            setState(() {
-                                              a = filess;
-                                            });
-                                            print(imagesNames);
-                                          } else {
-                                            // User canceled the picker
-                                          }
-                                        },
-                                        icon: Icon(Icons.add_a_photo_outlined),
-                                        iconSize: 100),
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Text("pick your images from here"),
-                                    )
-                                  ],
-                                ),
+                                                    setState(() {
+                                                      a = filess;
+                                                    });
+                                                    print(imagesNames);
+                                                  } else {
+                                                    // User canceled the picker
+                                                  }
+                                                },
+                                                icon: Icon(
+                                                    Icons.add_a_photo_outlined),
+                                                iconSize: 100),
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
+                                              child: Text(
+                                                  "pick your images from here"),
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
                           ),
