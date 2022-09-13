@@ -1,6 +1,7 @@
 import 'dart:ui' as ui;
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:example/content/detailsOfPost.dart';
 import 'package:example/model/postModel.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -10,11 +11,23 @@ import 'package:rflutter_alert/rflutter_alert.dart';
 class PostsManagement {
   final user = FirebaseAuth.instance.currentUser!;
 
+
   Widget buildPosts(State state, List postsList, PostModel x, context) {
     return GestureDetector(
       onTap: () {
         print("1");
+
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => DetailsOfPost(postModel: x),
+          ),
+        );
+
+        // print(x.description);
+
       },
+
       child: Card(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -118,6 +131,8 @@ class PostsManagement {
     );
   }
 
+
+
   List mapRecords(
       State state, List posts, QuerySnapshot<Map<String, dynamic>> records) {
     var _list = records.docs
@@ -136,4 +151,5 @@ class PostsManagement {
     state.setState(() {});
     return posts;
   }
+
 }
