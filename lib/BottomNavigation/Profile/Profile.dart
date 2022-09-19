@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:example/BottomNavigation/Profile/editProfile.dart';
 import 'package:example/content/yourPosts.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -87,7 +88,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           ),
                         ),
                       ),
-
                     ],
                   ),
                 );
@@ -105,15 +105,30 @@ class _ProfileScreenState extends State<ProfileScreen> {
             SizedBox(
               height: 20,
             ),
-            MaterialButton(onPressed: (){
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => YourPosts(),
-                ),
-              );
-            },child: Text("My Posts"), color: Colors.grey,)
-
+            MaterialButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => YourPosts(),
+                  ),
+                );
+              },
+              child: Text("My Posts"),
+              color: Colors.grey,
+            ),
+            MaterialButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => EditProfile(),
+                  ),
+                );
+              },
+              child: Text("Edit"),
+              color: Colors.grey,
+            )
           ],
         ),
       ),
