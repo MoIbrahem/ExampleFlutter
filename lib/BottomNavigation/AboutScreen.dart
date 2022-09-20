@@ -47,7 +47,7 @@ class AboutScreen extends StatelessWidget {
                   color: Colors.blue,
                 ),
                 child: Text(
-                  'Our app provides lots of benefits Our app provides lots of benefitsOur app provides lots of benefits ',
+                  'A social media app used to upload single or multiple design in the post with a description',
                   style: TextStyle(
                     fontSize: 25,
                     color: Colors.white,
@@ -59,7 +59,7 @@ class AboutScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 20),
               child: Text(
-                'About Developers',
+                'Developed by',
                 style: TextStyle(
                   fontSize: 25,
                   fontWeight: FontWeight.bold,

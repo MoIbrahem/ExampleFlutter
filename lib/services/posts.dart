@@ -15,8 +15,6 @@ class PostsManagement {
   Widget buildPosts(State state, List postsList, PostModel x, context) {
     return GestureDetector(
       onTap: () {
-        print("1");
-
         Navigator.push(
           context,
           MaterialPageRoute(
