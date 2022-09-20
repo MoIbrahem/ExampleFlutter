@@ -1,12 +1,11 @@
 import 'package:example/BottomNavigation/AboutScreen.dart';
-import 'package:example/BottomNavigation/Profile.dart';
+import 'package:example/BottomNavigation/Navigation.dart';
 import 'package:example/BottomNavigation/homeScreen.dart';
 import 'package:example/content/addContent.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
-class DoneScreen extends StatelessWidget {
-  const DoneScreen({Key? key}) : super(key: key);
+class FieldsScreen extends StatelessWidget {
+  const FieldsScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -139,7 +138,7 @@ class DoneScreen extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => ProfileScreen(),
+                          builder: (context) => Navigation(index: 1),
                         ),
                       );
                     },

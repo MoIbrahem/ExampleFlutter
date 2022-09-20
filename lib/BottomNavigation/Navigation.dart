@@ -1,5 +1,5 @@
 import 'package:example/BottomNavigation/AboutScreen.dart';
-import 'package:example/BottomNavigation/DoneScreen.dart';
+import 'package:example/BottomNavigation/Fields.dart';
 import 'package:example/BottomNavigation/Profile/Profile.dart';
 import 'package:example/BottomNavigation/homeScreen.dart';
 import 'package:example/model/storyModel.dart';
@@ -25,7 +25,7 @@ class _NavigationState extends State<Navigation> {
   List<Widget> screens = [
     HomeScreen(),
     ProfileScreen(),
-    DoneScreen(),
+    FieldsScreen(),
     AboutScreen()
   ];
 
