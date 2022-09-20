@@ -11,7 +11,6 @@ import 'package:rflutter_alert/rflutter_alert.dart';
 class PostsManagement {
   final user = FirebaseAuth.instance.currentUser!;
 
-
   Widget buildPosts(State state, List postsList, PostModel x, context) {
     return GestureDetector(
       onTap: () {
@@ -23,9 +22,7 @@ class PostsManagement {
         );
 
         // print(x.description);
-
       },
-
       child: Card(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -129,8 +126,6 @@ class PostsManagement {
     );
   }
 
-
-
   List mapRecords(
       State state, List posts, QuerySnapshot<Map<String, dynamic>> records) {
     var _list = records.docs
@@ -149,5 +144,4 @@ class PostsManagement {
     state.setState(() {});
     return posts;
   }
-
 }

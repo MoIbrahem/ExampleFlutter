@@ -86,7 +86,9 @@ class _AddContentScreenState extends State<AddContentScreen> {
                               Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => Navigation()));
+                                      builder: (context) => Navigation(
+                                            index: 0,
+                                          )));
                             },
                             width: 120,
                             child: Text(
