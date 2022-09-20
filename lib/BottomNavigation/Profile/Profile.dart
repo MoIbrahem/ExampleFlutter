@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:example/BottomNavigation/Profile/editProfile.dart';
 import 'package:example/content/yourPosts.dart';
+import 'package:example/main_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -166,7 +167,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               width: 150,
                               child: MaterialButton(
                                 onPressed: () {
-                                  FirebaseAuth.instance.signOut();
+                                  FirebaseAuth.instance
+                                      .signOut()
+                                      .then((value) =>
+                                          Navigator.pushReplacement(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      MainPage())))
+                                      .catchError((e) {
+                                    print(e);
+                                  });
                                 },
                                 child: Text(
                                   "Sign out",
