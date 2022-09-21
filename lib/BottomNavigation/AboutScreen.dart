@@ -47,7 +47,7 @@ class AboutScreen extends StatelessWidget {
                   color: Colors.blue,
                 ),
                 child: Text(
-                  'A social media app used to upload single or multiple design in the post with a description',
+                  'A social media app used to upload single or multiple designs in the post with a description',
                   style: TextStyle(
                     fontSize: 25,
                     color: Colors.white,
