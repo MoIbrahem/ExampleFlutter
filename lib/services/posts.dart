@@ -2,6 +2,7 @@ import 'dart:ui' as ui;
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:example/content/detailsOfPost.dart';
+import 'package:example/content/editPost.dart';
 import 'package:example/model/postModel.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -48,7 +49,16 @@ class PostsManagement {
                     alignment: MainAxisAlignment.center,
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      IconButton(onPressed: () {}, icon: Icon(Icons.edit)),
+                      IconButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => EditPost(postModel: x),
+                              ),
+                            );
+                          },
+                          icon: Icon(Icons.edit)),
                       IconButton(
                           onPressed: () {
                             Alert(
