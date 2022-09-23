@@ -1,12 +1,11 @@
 import 'package:example/BottomNavigation/AboutScreen.dart';
-import 'package:example/BottomNavigation/Profile.dart';
+import 'package:example/BottomNavigation/Profile/Profile.dart';
 import 'package:example/BottomNavigation/homeScreen.dart';
 import 'package:example/content/addContent.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
-class DoneScreen extends StatelessWidget {
-  const DoneScreen({Key? key}) : super(key: key);
+class FieldsScreen extends StatelessWidget {
+  const FieldsScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -37,42 +36,93 @@ class DoneScreen extends StatelessWidget {
               SizedBox(
                 height: 20,
               ),
-              Text(
-                'App consist of : ',
-                style: TextStyle(
-                  fontSize: 25,
-                  fontWeight: FontWeight.bold,
+              Container(
+                decoration: BoxDecoration(
+                  color: Colors.blue,
+                  borderRadius: BorderRadius.circular(20),
                 ),
+                padding: EdgeInsets.all(5),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 30),
+                  child: Text(
+                    'App consists of : ',
+                    style: TextStyle(
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 40,
+              ),
+              Row(
+                children: [
+                  CircleAvatar(
+                    child: Text(
+                      '1',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    backgroundColor: Colors.blue,
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Text(
+                    'OnBoarding Screen',
+                    style: TextStyle(
+                      fontSize: 23,
+                      color: Colors.blue,
+                      // fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
               ),
               SizedBox(
                 height: 20,
               ),
-              Text(
-                '1. OnBoarding Screen',
-                style: TextStyle(
-                  fontSize: 23,
-                  // fontWeight: FontWeight.bold,
-                ),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Text(
-                '2. Register System',
-                style: TextStyle(
-                  fontSize: 23,
-                  // fontWeight: FontWeight.bold,
-                ),
+              Row(
+                children: [
+                  CircleAvatar(
+                    child: Text(
+                      '2',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    backgroundColor: Colors.blue,
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Text(
+                    'Register System',
+                    style: TextStyle(
+                      fontSize: 23,
+                      color: Colors.blue,
+                      // fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
               ),
               SizedBox(
                 height: 20,
               ),
               Row(children: [
+                CircleAvatar(
+                  child: Text(
+                    '3',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  backgroundColor: Colors.blue,
+                ),
+                SizedBox(
+                  width: 10,
+                ),
                 Text(
-                  '3. Home Screen',
+                  'Home Screen',
                   style: TextStyle(
                     fontSize: 23,
-                    // color: Colors.blue,
+                    color: Colors.blue,
                     // fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -94,11 +144,21 @@ class DoneScreen extends StatelessWidget {
                 height: 20,
               ),
               Row(children: [
+                CircleAvatar(
+                  child: Text(
+                    '4',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  backgroundColor: Colors.blue,
+                ),
+                SizedBox(
+                  width: 10,
+                ),
                 Text(
-                  '4. Add content Screen',
+                  'Add content Screen',
                   style: TextStyle(
                     fontSize: 23,
-
+                    color: Colors.blue,
 
                     // fontWeight: FontWeight.bold,
                   ),
@@ -117,16 +177,25 @@ class DoneScreen extends StatelessWidget {
                     },
                     child: Text('Go'))
               ]),
-
               SizedBox(
                 height: 20,
               ),
               Row(children: [
+                CircleAvatar(
+                  child: Text(
+                    '5',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  backgroundColor: Colors.blue,
+                ),
+                SizedBox(
+                  width: 10,
+                ),
                 Text(
-                  '5. Profile Screen',
+                  'Profile Screen',
                   style: TextStyle(
                     fontSize: 23,
-
+                    color: Colors.blue,
 
                     // fontWeight: FontWeight.bold,
                   ),
@@ -148,23 +217,47 @@ class DoneScreen extends StatelessWidget {
               SizedBox(
                 height: 20,
               ),
-              Text(
-                '6. fields Screen',
-                style: TextStyle(
-                  fontSize: 23,
-                  // fontWeight: FontWeight.bold,
-                ),
+              Row(
+                children: [
+                  CircleAvatar(
+                    child: Text(
+                      '6',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    backgroundColor: Colors.blue,
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Text(
+                    'fields Screen',
+                    style: TextStyle(
+                      fontSize: 23,
+                      color: Colors.blue,
+                      // fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
               ),
               SizedBox(
                 height: 20,
               ),
-
               Row(children: [
+                CircleAvatar(
+                  child: Text(
+                    '7',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  backgroundColor: Colors.blue,
+                ),
+                SizedBox(
+                  width: 10,
+                ),
                 Text(
-                  '7. About Screen',
+                  'About Screen',
                   style: TextStyle(
                     fontSize: 23,
-
+                    color: Colors.blue,
                     // fontWeight: FontWeight.bold,
                   ),
                 ),

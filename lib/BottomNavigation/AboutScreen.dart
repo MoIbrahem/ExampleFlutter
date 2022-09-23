@@ -25,46 +25,70 @@ class AboutScreen extends StatelessWidget {
       body: Container(
         // color: Colors.grey,
         width: double.infinity,
+        padding: EdgeInsets.only(top: 50),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 20),
-              child: Text(
-                'About App',
-                style: TextStyle(
-                  fontSize: 25,
-                  fontWeight: FontWeight.bold,
-                ),
+            Container(
+              decoration: BoxDecoration(
+                color: Colors.blue,
+                borderRadius: BorderRadius.circular(20),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Container(
-                padding: const EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  color: Colors.blue,
-                ),
+              padding: EdgeInsets.all(5),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Text(
-                  'A social media app used to upload single or multiple designs in the post with a description',
+                  'About App',
                   style: TextStyle(
-                    fontSize: 25,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
                     color: Colors.white,
                   ),
                 ),
               ),
             ),
-            SizedBox(height: 50),
+            SizedBox(
+              height: 30,
+            ),
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 20),
-              child: Text(
-                'Developed by',
-                style: TextStyle(
-                  fontSize: 25,
-                  fontWeight: FontWeight.bold,
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 30),
+                // decoration: BoxDecoration(
+                //   borderRadius: BorderRadius.circular(20),
+                //   color: Colors.blue,
+                // ),
+                child: Text(
+                  'A social media app used to upload single or multiple designs in the post with a description',
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: Colors.blue,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
+            ),
+            SizedBox(height: 50),
+            Container(
+              decoration: BoxDecoration(
+                color: Colors.blue,
+                borderRadius: BorderRadius.circular(20),
+              ),
+              padding: EdgeInsets.all(5),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 30),
+                child: Text(
+                  'Developed by',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 40,
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 30),
@@ -78,17 +102,31 @@ class AboutScreen extends StatelessWidget {
                             'https://avatars.githubusercontent.com/u/51864970?v=4'),
                       ),
                       SizedBox(
-                        height: 10,
+                        height: 20,
                       ),
-                      Text('Mohammed Ibrahim'),
+                      Container(
+                          padding: EdgeInsets.all(5),
+
+                          child: Text(
+                            'Mohammed Ibrahim',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.blue),
+                          )),
                       SizedBox(
                         height: 10,
                       ),
-                      Text('Flutter Developer'),
+                      Container(
+                          padding: EdgeInsets.all(5),
+
+                          child: Text(
+                            'Flutter Developer',
+                            style: TextStyle(color: Colors.blue,),
+                          )),
                     ],
                   ),
                   SizedBox(
-                    width: 50,
+                    width: 40,
                   ),
                   Column(
                     children: [
@@ -98,13 +136,21 @@ class AboutScreen extends StatelessWidget {
                             'https://avatars.githubusercontent.com/u/73416301?s=400&u=c2542cf6d5ec4465dbfb8f46d86aced2d63d85dd&v=4'),
                       ),
                       SizedBox(
-                        height: 10,
+                        height: 20,
                       ),
-                      Text('Nada Elborhamy'),
+                      Container(
+                        padding: EdgeInsets.all(5),
+                        child: Text(
+                          'Nada Elborhamy',
+                          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.blue),
+                        ),
+                      ),
                       SizedBox(
                         height: 10,
                       ),
-                      Text('Flutter Developer'),
+                      Container(
+                          padding: EdgeInsets.all(5),
+                          child: Text('Flutter Developer', style: TextStyle( color: Colors.blue),)),
                     ],
                   ),
                 ],
