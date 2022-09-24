@@ -31,30 +31,65 @@ class _OnBordingState extends State<OnBording> {
           },
           children: [
             Container(
-              color: Colors.teal.shade300,
+              color: Colors.blueAccent,
               child: const Center(
                 child: Text(
                   'Welcome to our app',
-                  style: TextStyle(fontSize: 20, color: Colors.white),
+                  style: TextStyle(
+                      fontSize: 35,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold),
                 ),
               ),
             ),
             Container(
-              color: Colors.pink,
-              child: const Center(
-                child: Text(
-                  'Welcome to our app',
-                  style: TextStyle(fontSize: 20, color: Colors.white),
-                ),
+              color: Colors.cyan,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Show Us is the best place',
+                    style: TextStyle(fontSize: 30, color: Colors.white),
+                  ),
+                  Text(
+                    'where you can post or view great designs',
+                    style: TextStyle(fontSize: 20, color: Colors.white),
+                  ),
+                ],
               ),
             ),
             Container(
-              color: Colors.blueGrey,
-              child: const Center(
-                child: Text(
-                  'Welcome to our app',
-                  style: TextStyle(fontSize: 20, color: Colors.white),
-                ),
+              color: Colors.lightBlue,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Just register',
+                    style: TextStyle(fontSize: 35, color: Colors.white),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Row(
+                    children: [
+                      Text(
+                        '  and get ready to ',
+                        style: TextStyle(fontSize: 20, color: Colors.white),
+                      ),
+                      Text(
+                        'Show Us',
+                        style: TextStyle(
+                            fontSize: 22,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      Text(
+                        ' great designs ',
+                        style: TextStyle(fontSize: 20, color: Colors.white),
+                      ),
+                    ],
+                  )
+                ],
               ),
             ),
           ],
