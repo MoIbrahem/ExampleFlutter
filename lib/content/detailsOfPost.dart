@@ -115,25 +115,29 @@ class _DetailsOfPostState extends State<DetailsOfPost> {
               CarouselSlider(
                 items: widget.postModel.images!
                     .map((item) => FullScreenWidget(
-                      child: ClipRRect(
-                        child: Image.network(
-                          item,
-                          fit: BoxFit.cover,
-                          width: 1000.0,
+                        child: Center(
+                          child: ClipRRect(
+                            child: Image.network(
+                              item,
+                              fit: BoxFit.cover,
+                              width: 1000.0,
+                              alignment: Alignment.center,
+                            ),
+                          ),
                         ),
-                      ),
-                    ))
+                      ))
                     .toList(),
                 options: CarouselOptions(
                     enableInfiniteScroll: false,
-                    enlargeCenterPage: true,
-                    height: 400,
-                    viewportFraction: 1,
-                    onPageChanged: (index, reason) {
-                      setState(() {
-                        _current = index;
-                      });
-                    }),
+                  enlargeCenterPage: true,
+                  height: 400,
+                  aspectRatio: 16 / 9,
+                  viewportFraction: 1,
+                  onPageChanged: (index, reason) {
+                    setState(() {
+                      _current = index;
+                    });
+                  }),
               ),
               SizedBox(
                 height: 10,
