@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:ui' as ui;
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -5,12 +6,40 @@ import 'package:example/content/detailsOfPost.dart';
 import 'package:example/content/editPost.dart';
 import 'package:example/model/postModel.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:path/path.dart' as Path;
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 class PostsManagement {
   final user = FirebaseAuth.instance.currentUser!;
+
+  Future<List<String>> uploadFiles(List _images) async {
+    List<String> imagesUrls = [];
+
+    for (var _image in _images) {
+      Reference storageReference = FirebaseStorage.instance
+          .ref()
+          .child('posts/${pid}/${Path.basename(_image.path)}');
+      UploadTask uploadTask = storageReference.putFile(_image);
+
+      var snapshot = await uploadTask.whenComplete(() {});
+      var urlDownload = await snapshot.ref.getDownloadURL();
+
+      imagesUrls.add(urlDownload);
+    }
+
+    print(imagesUrls);
+    return imagesUrls;
+  }
+
+  Future<void> deleteFiles(List _images) async {
+    for (var _image in _images) {
+      Reference storageReference = FirebaseStorage.instance.refFromURL(_image);
+      await storageReference.delete();
+    }
+  }
 
   Widget buildPosts(State state, List postsList, PostModel x, context) {
     return GestureDetector(
@@ -46,78 +75,78 @@ class PostsManagement {
             ),
             x.email == user.email
                 ? ButtonBar(
-                    alignment: MainAxisAlignment.center,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      IconButton(
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => EditPost(postModel: x),
+              alignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                IconButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => EditPost(postModel: x),
+                        ),
+                      );
+                    },
+                    icon: Icon(Icons.edit)),
+                IconButton(
+                    onPressed: () {
+                      Alert(
+                          context: context,
+                          type: AlertType.warning,
+                          title: "Confirm Delete",
+                          buttons: [
+                            DialogButton(
+                              onPressed: () async {
+                                showDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    return Center(
+                                      child:
+                                      CircularProgressIndicator(),
+                                    );
+                                  },
+                                );
+
+                                await FirebaseFirestore.instance
+                                    .collection('users')
+                                    .doc(user.uid)
+                                    .collection('posts')
+                                    .doc(x.id)
+                                    .delete();
+                                await postsList.remove(x);
+                                state.setState(() {});
+
+                                Navigator.pop(context);
+                                Navigator.of(context).pop();
+                              },
+                              color: Colors.green,
+                              width: 120,
+                              child: Text(
+                                "Yes",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 20),
                               ),
-                            );
-                          },
-                          icon: Icon(Icons.edit)),
-                      IconButton(
-                          onPressed: () {
-                            Alert(
-                                    context: context,
-                                    type: AlertType.warning,
-                                    title: "Confirm Delete",
-                                    buttons: [
-                                      DialogButton(
-                                        onPressed: () async {
-                                          showDialog(
-                                            context: context,
-                                            builder: (context) {
-                                              return Center(
-                                                child:
-                                                    CircularProgressIndicator(),
-                                              );
-                                            },
-                                          );
-
-                                          await FirebaseFirestore.instance
-                                              .collection('users')
-                                              .doc(user.uid)
-                                              .collection('posts')
-                                              .doc(x.id)
-                                              .delete();
-                                          await postsList.remove(x);
-                                          state.setState(() {});
-
-                                          Navigator.pop(context);
-                                          Navigator.of(context).pop();
-                                        },
-                                        color: Colors.green,
-                                        width: 120,
-                                        child: Text(
-                                          "Yes",
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 20),
-                                        ),
-                                      ),
-                                      DialogButton(
-                                        onPressed: () => Navigator.pop(context),
-                                        width: 120,
-                                        color: Colors.red,
-                                        child: Text(
-                                          "No",
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 20),
-                                        ),
-                                      )
-                                    ],
-                                    desc:
-                                        "Are you sure you want to delete this post?")
-                                .show();
-                          },
-                          icon: Icon(Icons.delete)),
-                    ],
-                  )
+                            ),
+                            DialogButton(
+                              onPressed: () => Navigator.pop(context),
+                              width: 120,
+                              color: Colors.red,
+                              child: Text(
+                                "No",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 20),
+                              ),
+                            )
+                          ],
+                          desc:
+                          "Are you sure you want to delete this post?")
+                          .show();
+                    },
+                    icon: Icon(Icons.delete)),
+              ],
+            )
                 : Container(),
             Padding(
               padding: const EdgeInsets.only(right: 8),
@@ -136,16 +165,15 @@ class PostsManagement {
     );
   }
 
-  List mapRecords(
-      State state, List posts, QuerySnapshot<Map<String, dynamic>> records) {
+  List mapRecords(State state, List posts, QuerySnapshot<Map<String, dynamic>> records) {
     var _list = records.docs
         .map((post) => PostModel(
-            id: post.id,
-            title: post['title'],
-            email: post['email'],
-            images: post['images'],
-            description: post['description'],
-            created: post['created'].toDate()))
+        id: post.id,
+        title: post['title'],
+        email: post['email'],
+        images: post['images'],
+        description: post['description'],
+        created: post['created'].toDate()))
         .toList();
 
     print(_list);

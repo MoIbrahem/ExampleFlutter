@@ -3,12 +3,11 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:example/BottomNavigation/Navigation.dart';
+import 'package:example/services/posts.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:path/path.dart' as Path;
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 class AddContentScreen extends StatefulWidget {
@@ -42,7 +41,7 @@ class _AddContentScreenState extends State<AddContentScreen> {
     );
 
     var firebaseUser = await FirebaseAuth.instance.currentUser!;
-    List Urls = await uploadFiles(imagesNames);
+    List Urls = await PostsManagement().uploadFiles(imagesNames);
     await FirebaseFirestore.instance
         .collection('users')
         .doc(firebaseUser.uid)
@@ -296,24 +295,7 @@ class _AddContentScreenState extends State<AddContentScreen> {
     );
   }
 
-  Future<List<String>> uploadFiles(List _images) async {
-    List<String> imagesUrls = [];
 
-    for (var _image in _images) {
-      Reference storageReference = FirebaseStorage.instance
-          .ref()
-          .child('posts/${pid}/${Path.basename(_image.path)}');
-      UploadTask uploadTask = storageReference.putFile(_image);
-
-      var snapshot = await uploadTask.whenComplete(() {});
-      var urlDownload = await snapshot.ref.getDownloadURL();
-
-      imagesUrls.add(urlDownload);
-    }
-
-    print(imagesUrls);
-    return imagesUrls;
-  }
 }
 
 Widget buildImages(File x) {
