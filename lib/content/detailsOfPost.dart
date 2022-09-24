@@ -1,11 +1,15 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:example/content/editPost.dart';
 import 'package:example/model/postModel.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:full_screen_image_null_safe/full_screen_image_null_safe.dart';
-
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 class DetailsOfPost extends StatefulWidget {
   final PostModel postModel;
+
   const DetailsOfPost({Key? key, required this.postModel}) : super(key: key);
 
   @override
@@ -15,13 +19,88 @@ class DetailsOfPost extends StatefulWidget {
 class _DetailsOfPostState extends State<DetailsOfPost> {
   int _current = 0;
   final CarouselController _controller = CarouselController();
+  final user = FirebaseAuth.instance.currentUser!;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('details of the post'),
-        centerTitle: true,
+        title: const Text('Details of the post'),
+        actions: [
+          widget.postModel.email == user.email
+              ? ButtonBar(
+                  alignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    IconButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  EditPost(postModel: widget.postModel),
+                            ),
+                          );
+                        },
+                        icon: Icon(Icons.edit)),
+                    IconButton(
+                        onPressed: () {
+                          Alert(
+                                  context: context,
+                                  type: AlertType.warning,
+                                  title: "Confirm Delete",
+                                  buttons: [
+                                    DialogButton(
+                                      onPressed: () async {
+                                        showDialog(
+                                          context: context,
+                                          builder: (context) {
+                                            return Center(
+                                              child:
+                                                  CircularProgressIndicator(),
+                                            );
+                                          },
+                                        );
+
+                                        await FirebaseFirestore.instance
+                                            .collection('users')
+                                            .doc(user.uid)
+                                            .collection('posts')
+                                            .doc(widget.postModel.id)
+                                            .delete();
+                                        setState(() {});
+
+                                        Navigator.pop(context);
+                                        Navigator.of(context).pop();
+                                      },
+                                      color: Colors.green,
+                                      width: 120,
+                                      child: Text(
+                                        "Yes",
+                                        style: TextStyle(
+                                            color: Colors.white, fontSize: 20),
+                                      ),
+                                    ),
+                                    DialogButton(
+                                      onPressed: () => Navigator.pop(context),
+                                      width: 120,
+                                      color: Colors.red,
+                                      child: Text(
+                                        "No",
+                                        style: TextStyle(
+                                            color: Colors.white, fontSize: 20),
+                                      ),
+                                    )
+                                  ],
+                                  desc:
+                                      "Are you sure you want to delete this post?")
+                              .show();
+                        },
+                        icon: Icon(Icons.delete)),
+                  ],
+                )
+              : Container(),
+        ],
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -79,7 +158,8 @@ class _DetailsOfPostState extends State<DetailsOfPost> {
                   );
                 }).toList(),
               ),
-              ListTile(
+
+            ListTile(
                 title: Center(child: Text(widget.postModel.title)),
                 subtitle: Center(
                   child: Text(

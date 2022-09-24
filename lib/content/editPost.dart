@@ -97,7 +97,7 @@ class _EditPostState extends State<EditPost> {
                     .then((value) => Alert(
                             context: context,
                             type: AlertType.success,
-                            title: "edited Sucessfully",
+                            title: "Edited Sucessfully",
                             buttons: [
                               DialogButton(
                                 onPressed: () {
@@ -117,7 +117,7 @@ class _EditPostState extends State<EditPost> {
                                 ),
                               )
                             ],
-                            desc: "Your Post is now available to all users.")
+                            desc: "Your post is now available to all users.")
                         .show())
                     .catchError((e) {
                   Alert(
